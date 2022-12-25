@@ -77,6 +77,8 @@ playerbullet.scale=0.4
 
 
 enemyGroup=new Group()
+bulletGroup=new Group()
+
 
 }
 
@@ -181,7 +183,7 @@ if(gameState==="play"){
      }
 
 spawnenemies()
-shootbullets()
+spawnplrBullet()
 
 // tanker movement
 // player.debug=true
@@ -230,7 +232,7 @@ if(gameState==="gunselected"){
 if(gameState==="play"){
     textSize(40)
     fill("red")
-    text("Press Space Bar to shoot Bullets",width/4,height/2)
+    text("Press Space Bar and Direction Key to shoot Bullets",width/4,height/2)
 }
 
 
@@ -318,3 +320,40 @@ if(keyDown("space")){
 }
 
 }
+
+
+function spawnplrBullet(){
+
+    var bullet =createSprite(player.position.x,player.position.y-17,10,1)
+    bullet.addImage(playerbulletimg)
+    bullet.scale=0.4
+    bullet.depth=player.depth-1
+    bullet.visible=false
+    
+       if(keyDown("space") && keyDown("RIGHT_ARROW") ){
+        bullet.visible=true
+        bullet.velocityX = 5
+        player.x=player.x+0
+        }
+    
+        if(keyDown("space") && keyDown("LEFT_ARROW") ){
+            bullet.visible=true
+            bullet.velocityX = -5
+            }
+
+            if(keyDown("space") && keyDown("UP_ARROW") ){
+                bullet.visible=true
+                bullet.velocityY = -5
+                }
+    
+                if(keyDown("space") && keyDown("DOWN_ARROW") ){
+                    bullet.visible=true
+                    bullet.velocityY = 5
+                    }
+            
+    
+            bullet.lifetime = 200 ; 
+            bulletGroup.add(bullet)
+        
+    }
+    
